@@ -157,8 +157,22 @@ namespace OpenLiveWriter.PostEditor.Tables
             // extract the begin and end cells
             if (selectedCells.Count == 0)
             {
-                // see if the selection is contained within a single cell
-                beginCell = selectedRange.Start.GetParentElement(ElementFilters.TABLE_CELL_ELEMENT) as IHTMLTableCell;
+                // See if the selection is contained within a single cell
+                // Query for both table cells and tables, the selection can occasionally end up between cells.
+                IHTMLElement firstTableEl = selectedRange.Start.GetParentElement(
+                    el => el is IHTMLTableCell || el is IHTMLTableRow || el is IHTMLTable);
+                
+                if (firstTableEl is IHTMLTableRow)
+                {
+                    // The selection is inside of a table row, but no specific cell
+                    // Get the last cell in the selection, and set that as the begin cell
+                    var cellEndLeft = selectedRange.End.SeekElementLeft(ElementFilters.TABLE_CELL_ELEMENT);
+                    beginCell = cellEndLeft as IHTMLTableCell;
+                } else
+                {
+                    beginCell = firstTableEl as IHTMLTableCell;
+                }
+
                 if (beginCell != null)
                 {
                     // make sure the cell is content editable (it would not be in the case
