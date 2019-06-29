@@ -111,22 +111,13 @@ namespace OpenLiveWriter.PostEditor.Tables
                 // insert the table
                 htmlEditor.InsertHtml(tableHtml.ToString(), false);
 
-                // If we have an MSHTML available
+                // select the first cell for editing if we have an mshtml selection
                 if (insertingIntoMshtml)
                 {
-                    // select the first cell for editing if we have an mshtml selection
                     IHTMLElement[] cells = targetMarkupRange.GetElements(ElementFilters.TABLE_CELL_ELEMENT, true);
                     if (cells.Length > 0)
                     {
                         SelectCell(editorContext, cells[0] as IHTMLTableCell);
-                    }
-
-                    // Update design-time borders
-                    IHTMLElement[] tables = targetMarkupRange.GetElements(ElementFilters.TABLE_ELEMENTS, true);
-                    if(tables.Length > 0)
-                    {
-                        var table = tables[0] as IHTMLTable;
-                        TableHelper.UpdateDesignTimeBorders(table);
                     }
                 }
             }
