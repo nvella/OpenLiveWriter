@@ -131,14 +131,6 @@ namespace OpenLiveWriter.PostEditor.Tables
             get { return !HasContiguousSelection; }
         }
 
-        /// <summary>
-        /// Finds the range of cells for a potential table, given a MarkupRange
-        /// Called by TableSelection constructor to determine if there is a table in selection
-        /// </summary>
-        /// <param name="selectedRange">Selected markup range to analyse</param>
-        /// <param name="selectedCells">Out: the cells selected</param>
-        /// <param name="beginCell">Out: the first cell in the table</param>
-        /// <param name="endCell">Out: the last cell in the table</param>
         private void FindCellRange(MarkupRange selectedRange, out ArrayList selectedCells, out IHTMLTableCell beginCell, out IHTMLTableCell endCell)
         {
             // default to null
