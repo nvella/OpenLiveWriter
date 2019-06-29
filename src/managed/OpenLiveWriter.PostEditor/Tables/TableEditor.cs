@@ -1139,12 +1139,8 @@ namespace OpenLiveWriter.PostEditor.Tables
                 // corresponding cells from the source row
                 for (int i = 0; i < selectedRow.cells.length; i++)
                 {
-                    // Create the new cell, and copy attributes
                     IHTMLTableCell newCell = InsertCell(newRow);
                     HTMLElementHelper.CopyAttributes(selectedRow.cells.item(i, i) as IHTMLElement, newCell as IHTMLElement);
-
-                    // Update design-time borders
-                    TableHelper.UpdateDesignTimeBorders(TableSelection.Table, newCell as IHTMLElement2);
                 }
 
                 // commit the changes
@@ -1282,9 +1278,6 @@ namespace OpenLiveWriter.PostEditor.Tables
 
                     // copy the attributes of the source cell for this column
                     HTMLElementHelper.CopyAttributes(column.BaseCell as IHTMLElement, newCell as IHTMLElement);
-
-                    // Update design-time borders
-                    TableHelper.UpdateDesignTimeBorders(TableSelection.Table, newCell as IHTMLElement2);
                 }
             }
         }
