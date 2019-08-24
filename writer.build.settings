@@ -2,32 +2,34 @@
 
     <PropertyGroup>
       <Project>Writer</Project>
-      <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+      <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
       <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
       <SrcManagedRoot>$(RepoRoot)\src\managed</SrcManagedRoot>
       <SolutionDir Condition="'$(SolutionDir)'==''">$(SrcManagedRoot)</SolutionDir>
+      <BuildPathEnvironment>$(BUILD_PATH)</BuildPathEnvironment>
     </PropertyGroup>
     
     <!-- ********************************************************************************************* -->
     <!-- * Build Environment settings  -->
     <!-- ********************************************************************************************* -->
-    <PropertyGroup>        
+    <!-- DIRTY HACK ALERT: All these lines below break MSIX packaging!
+        I'm really not an expert in MSBuild, so I assume they're safe to leave commented out
+        for now. -nvella -->
+    <!--<PropertyGroup>        
         <BuildPathEnvironment>$(BUILD_PATH)</BuildPathEnvironment>
-      
-        <!-- ManagedToolPath only needs to really have the installed 2.0 path for parity with BUILD.EXE -->
+         ManagedToolPath only needs to really have the installed 2.0 path for parity with BUILD.EXE 
         <ManagedToolPathEnvironment>$(URTTARGET_2_0)</ManagedToolPathEnvironment>
       
-        <!-- This is the Path during the build, that will be set by SetEnvironment,
-             and is different from the path in the command window -->
+         This is the Path during the build, that will be set by SetEnvironment,
+             and is different from the path in the command window 
         <Path>$(ManagedToolPathEnvironment);$(BuildPathEnvironment);</Path>
 
-        <!-- Prevent accidental pickup of local-machine scripts -->
+         Prevent accidental pickup of local-machine scripts 
         <MSBuildExtensionsPath>$(MSBuildToolsPath)\MsBuildExtensions</MSBuildExtensionsPath>
         <MSBuildExtensionsPath32>$(MsBuildExtensionsPath)</MSBuildExtensionsPath32>
 
         <DirectorySuffix Condition="'$(BUILD_ALT_DIR)'!=''">$(BUILD_ALT_DIR)</DirectorySuffix>
-
-    </PropertyGroup>
+    </PropertyGroup>-->
     
     <!-- ********************************************************************************************* -->
     <!-- *** Configurations, Platforms, Architectures Defaults -->
